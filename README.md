@@ -1,3 +1,5 @@
+![Img](assets/Screenshot_20250414_123331.png)
+
 ##Android project
 - List screen
 - Load data from remote API, which returns a list of Post(userId, id, title)
