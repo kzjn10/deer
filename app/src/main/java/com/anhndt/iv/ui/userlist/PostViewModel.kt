@@ -4,13 +4,16 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anhndt.iv.domain.usecase.GetPostUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PostViewModel(private val getPostsUseCase: GetPostUseCase) : ViewModel(),
+@HiltViewModel
+class PostViewModel @Inject constructor(private val getPostsUseCase: GetPostUseCase) : ViewModel(),
     DefaultLifecycleObserver {
 
     private val _uiState = MutableStateFlow<PostUIState>(PostUIState.Loading)
@@ -19,7 +22,7 @@ class PostViewModel(private val getPostsUseCase: GetPostUseCase) : ViewModel(),
 
     fun fetchPosts() {
         fetchPostJob?.cancel()
-        fetchPostJob = viewModelScope.launch (Dispatchers.IO){
+        fetchPostJob = viewModelScope.launch(Dispatchers.IO) {
             _uiState.value = PostUIState.Loading
             getPostsUseCase.invoke().fold(
                 onSuccess = { posts ->

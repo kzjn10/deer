@@ -16,7 +16,9 @@ import com.anhndt.iv.domain.usecase.impl.GetPostUseCaseImpl
 import com.anhndt.iv.ui.nav.NavGraph
 import com.anhndt.iv.ui.theme.IvTheme
 import com.anhndt.iv.ui.userlist.PostViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
